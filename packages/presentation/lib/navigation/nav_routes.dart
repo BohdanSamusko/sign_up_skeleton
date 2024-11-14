@@ -1,0 +1,4 @@
+enum NavRoutes{
+  splash,
+  signUp
+}
