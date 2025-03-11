@@ -1,4 +1,1 @@
-enum NavRoutes{
-  splash,
-  signUp
-}
+enum NavRoutes { signUp }

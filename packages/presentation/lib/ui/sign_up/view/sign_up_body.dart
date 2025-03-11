@@ -8,8 +8,7 @@ import 'package:presentation/ui/sign_up/enum/email_validation_rule.dart';
 import 'package:presentation/ui/sign_up/enum/password_validation_error.dart';
 
 class SignUpBody extends StatelessWidget {
-  SignUpBody({super.key});
-
+  const SignUpBody({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +26,7 @@ class SignUpBody extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                   Padding(
@@ -35,6 +34,7 @@ class SignUpBody extends StatelessWidget {
                       horizontal: 30,
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                       onChanged: (value) => context.read<SignUpBloc>().add(
                             SignUpEvent.onEmailChanged(value),
@@ -43,18 +43,24 @@ class SignUpBody extends StatelessWidget {
                         hintText: 'Email',
                         helperText: '',
                         errorText: _formatEmailError(state.emailError),
-                        fillColor: state.isEmailReady ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
-                        filled: state.emailError != null || state.isEmailReady ? true : false,
+                        fillColor: state.isEmailReady
+                            ? Colors.green.withOpacity(0.1)
+                            : Colors.red.withOpacity(0.1),
+                        filled: state.emailError != null || state.isEmailReady,
                         enabledBorder: state.isEmailReady
                             ? successStateInputBorder
-                            : Theme.of(context).inputDecorationTheme.enabledBorder,
+                            : Theme.of(context)
+                                .inputDecorationTheme
+                                .enabledBorder,
                         focusedBorder: state.isEmailReady
                             ? successStateInputBorder
-                            : Theme.of(context).inputDecorationTheme.focusedBorder,
+                            : Theme.of(context)
+                                .inputDecorationTheme
+                                .focusedBorder,
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Padding(
@@ -67,60 +73,78 @@ class SignUpBody extends StatelessWidget {
                             SignUpEvent.onPasswordChanged(value),
                           ),
                       decoration: InputDecoration(
-                          hintText: 'Create your password',
-                          suffixIcon: IconButton(
-                            onPressed: () => context.read<SignUpBloc>().add(
-                                  SignUpEvent.onChangePasswordVisibility(),
-                                ),
-                            icon: Icon(
-                              state.isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-                            ),
+                        hintText: 'Create your password',
+                        suffixIcon: IconButton(
+                          onPressed: () => context.read<SignUpBloc>().add(
+                                const SignUpEvent.onChangePasswordVisibility(),
+                              ),
+                          icon: Icon(
+                            state.isPasswordVisible
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                           ),
-                          suffixIconColor: Color(0xFF6F91BC),
-                          fillColor: state.passwordErrors.isNotEmpty
-                              ? Colors.red.withOpacity(0.1)
-                              : Colors.green.withOpacity(0.1),
-                          filled: state.highlightPasswordErrors || state.isPasswordReady ? true : false,
-                          enabledBorder: state.isPasswordReady
-                              ? successStateInputBorder
-                              : Theme.of(context).inputDecorationTheme.enabledBorder,
-                          focusedBorder: state.isPasswordReady
-                              ? successStateInputBorder
-                              : Theme.of(context).inputDecorationTheme.focusedBorder,
-                          errorText: state.highlightPasswordErrors ? '' : null,
-                          helperText: ''),
+                        ),
+                        suffixIconColor: const Color(0xFF6F91BC),
+                        fillColor: state.passwordErrors.isNotEmpty
+                            ? Colors.red.withOpacity(0.1)
+                            : Colors.green.withOpacity(0.1),
+                        filled: state.highlightPasswordErrors ||
+                            state.isPasswordReady,
+                        enabledBorder: state.isPasswordReady
+                            ? successStateInputBorder
+                            : Theme.of(context)
+                                .inputDecorationTheme
+                                .enabledBorder,
+                        focusedBorder: state.isPasswordReady
+                            ? successStateInputBorder
+                            : Theme.of(context)
+                                .inputDecorationTheme
+                                .focusedBorder,
+                        errorText: state.highlightPasswordErrors ? '' : null,
+                        helperText: '',
+                      ),
                       obscureText: !state.isPasswordVisible,
                     ),
                   ),
                   _PasswordRequirementLabel(
                     title: '8 characters or more (no spaces)',
-                    isViolated: state.passwordErrors.contains(PasswordValidationError.minLengthError) ||
-                        state.passwordErrors.contains(PasswordValidationError.spaceCharacterError),
+                    isViolated: state.passwordErrors
+                            .contains(PasswordValidationError.minLengthError) ||
+                        state.passwordErrors.contains(
+                          PasswordValidationError.spaceCharacterError,
+                        ),
                     highlightViolation: state.highlightPasswordErrors,
                     isPasswordEmpty: state.password.isEmpty,
                   ),
                   _PasswordRequirementLabel(
                     title: 'Uppercase and lowercase letters',
-                    isViolated: state.passwordErrors.contains(PasswordValidationError.noLowerCaseLetter) == true ||
-                        state.passwordErrors.contains(PasswordValidationError.noUpperCaseLetter) == true,
+                    isViolated: state.passwordErrors.contains(
+                          PasswordValidationError.noLowerCaseLetter,
+                        ) ||
+                        state.passwordErrors.contains(
+                          PasswordValidationError.noUpperCaseLetter,
+                        ),
                     highlightViolation: state.highlightPasswordErrors,
                     isPasswordEmpty: state.password.isEmpty,
                   ),
                   _PasswordRequirementLabel(
                     title: 'At least one digit',
-                    isViolated: state.passwordErrors.contains(PasswordValidationError.noDigit) == true,
+                    isViolated: state.passwordErrors
+                        .contains(PasswordValidationError.noDigit),
                     highlightViolation: state.highlightPasswordErrors,
                     isPasswordEmpty: state.password.isEmpty,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                   Align(
                     child: GradientButton(
                       onPressed: () {
-                        context.read<SignUpBloc>().add(SignUpEvent.onSignUp());
+                        context
+                            .read<SignUpBloc>()
+                            .add(const SignUpEvent.onSignUp());
                       },
-                      child: Text('Sign up'),
+                      child: const Text('Sign up'),
                     ),
                   ),
                 ],
@@ -163,7 +187,10 @@ class _PasswordRequirementLabel extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: _defineTitleColor()),
+        style: Theme.of(context)
+            .textTheme
+            .bodySmall
+            ?.copyWith(color: _defineTitleColor()),
       ),
     );
   }

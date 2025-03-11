@@ -13,7 +13,7 @@ class SignUpState with _$SignUpState {
     required bool highlightPasswordErrors,
   }) = _SignUpState;
 
-  factory SignUpState.initial() => SignUpState(
+  factory SignUpState.initial() => const SignUpState(
         email: '',
         password: '',
         passwordErrors: {},

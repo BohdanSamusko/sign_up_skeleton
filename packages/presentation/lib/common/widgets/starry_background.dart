@@ -11,7 +11,7 @@ class StarryBackground extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 Color(0xFFF4F9FF),
@@ -23,7 +23,10 @@ class StarryBackground extends StatelessWidget {
           ),
         ),
         Align(
-          child: SvgPicture.asset('assets/svg/background_layer_stars.svg', package: 'presentation',),
+          child: SvgPicture.asset(
+            'assets/svg/background_layer_stars.svg',
+            package: 'presentation',
+          ),
         ),
         child,
       ],

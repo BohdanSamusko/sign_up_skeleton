@@ -5,6 +5,6 @@ import 'package:injectable/injectable.dart';
 import 'package:presentation/di/di.config.dart';
 
 @InjectableInit()
-void initPresentationDependencies({required String env}){
+void initPresentationDependencies({required String env}) {
   core.getIt.init(environment: env);
 }

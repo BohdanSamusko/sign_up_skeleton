@@ -9,7 +9,7 @@ ThemeData buildLightTheme() {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),
-        minimumSize: Size(240, 48),
+        minimumSize: const Size(240, 48),
         foregroundColor: Colors.white,
         textStyle: GoogleFonts.inter().copyWith(
           fontWeight: FontWeight.w700,
@@ -19,22 +19,22 @@ ThemeData buildLightTheme() {
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
-        borderSide: BorderSide(color: Color(0xFF6F91BC)),
+        borderSide: const BorderSide(color: Color(0xFF6F91BC)),
         borderRadius: BorderRadius.circular(10),
       ),
     ),
     textTheme: GoogleFonts.interTextTheme().copyWith(
-      titleLarge: TextStyle(
+      titleLarge: const TextStyle(
         fontSize: 28,
         fontWeight: FontWeight.w700,
         color: Color(0xFF4A4E71),
       ),
-      labelMedium: TextStyle(
+      labelMedium: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w400,
         color: Color(0xFF4A4E71),
       ),
-      bodySmall: TextStyle(
+      bodySmall: const TextStyle(
         fontSize: 13,
         color: Color(0xFF4A4E71),
       ),
@@ -45,6 +45,6 @@ ThemeData buildLightTheme() {
 /// Additional input border that is sharable
 /// and used for indicating success state of text field according to the design.
 final successStateInputBorder = OutlineInputBorder(
-  borderSide: BorderSide(color: Colors.green),
+  borderSide: const BorderSide(color: Colors.green),
   borderRadius: BorderRadius.circular(10),
 );
